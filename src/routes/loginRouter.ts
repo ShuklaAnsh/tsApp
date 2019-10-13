@@ -71,17 +71,6 @@ export class LoginRoute extends BaseRoute {
      */
     public attemptLogin(req: Request, res: Response, next: NextFunction) {
         console.log(req.body);
-        DbClient.connect()
-            .then((db) => {
-                return db!.collection("users").find().toArray();
-            })
-            .then((users : any) => {
-                console.log(users);
-                res.send(users);
-            })
-            .catch((error) => {
-                console.log(error.message);
-            });
         //set custom title
         this.title = "Login Page";
         //set message
@@ -89,7 +78,28 @@ export class LoginRoute extends BaseRoute {
             page : 'login',
             message: "Attempting to login"
         };
-
+        DbClient.connect()
+            .then((db) => {
+                return db!.collection("users").find({
+                    username: req.body.username_field,
+                    password: req.body.pw_field,
+                }).toArray();
+            })
+            .then((result : any) => {
+                if(result.length === 0){
+                    console.log("User not found");
+                    res.send({
+                        mode: 'error',
+                        msg: 'Username or password incorrect'
+                    });
+                } else{
+                    console.log(result);
+                    res.send(result);
+                };
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
         //render template
         this.render(req, res, "login", options);
     }

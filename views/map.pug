@@ -6,7 +6,7 @@ block append head
 block content
     h1(id='title')= title
     //- form to load map and create map
-    button(onclick="hello('ansh')")
+    button(onclick="hello('" + title + "')")
         | Create 
     div(id='map')
 
