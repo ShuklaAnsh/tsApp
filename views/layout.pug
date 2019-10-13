@@ -1,0 +1,22 @@
+doctype html
+html
+  block head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    nav
+      div(id='nb-logo')
+        p Creatures & Caves
+      ul(class='nb-list')
+        li(class=(page === 'index' ? 'nb-item nb-active' : 'nb-item'))
+          a(href = (page === 'index' ? '#' : '/')) home
+        li(class=(page === 'others' ? 'nb-item nb-active' : 'nb-item'))
+          a(href = (page === 'others' ? '#' : '#')) others
+        li(class=(page === 'login' ? 'nb-item nb-active' : 'nb-item'))
+          a(href = (page === 'login' ? '#' : '/login')) login
+        li(class=(page === 'map' ? 'nb-item nb-active' : 'nb-item'))
+          a(href = (page === 'map' ? '#' : '/map')) map
+
+
+    div(class='container')
+      block content

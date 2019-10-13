@@ -1,0 +1,51 @@
+/* Stylesheet used for all common styles */
+/* TODO: Grid to organize main componnets (header, menu, left, right, footer, etc) */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+body {
+  padding: 25px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: whitesmoke;
+  color: #333; }
+
+/**** Page layout ****/
+/** Nav bar **/
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: #333;
+  margin-bottom: 10px; }
+
+#nb-logo p {
+  padding-left: 15px;
+  display: inline-block;
+  color: whitesmoke;
+  font-size: 24px;
+  text-transform: capitalize;
+  font-variant: small-caps; }
+
+.nb-list {
+  display: flex;
+  list-style: none; }
+
+.nb-item a {
+  display: inline-block;
+  line-height: 25px;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: whitesmoke;
+  text-transform: uppercase; }
+
+.nb-item:not(.nb-active) a:hover {
+  background-color: whitesmoke;
+  color: #333;
+  cursor: pointer; }
+
+.nb-active a {
+  background-color: yellow;
+  color: #333; }

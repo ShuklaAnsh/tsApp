@@ -1,0 +1,35 @@
+{
+  "name": "tsApp",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "jest --coverage",
+    "build-ts": "tsc -p tsconfig.json && tsc -p src/frontend/tsconfig.json",
+    "ts-backend:watch": "tsc -p tsconfig.json --watch",
+    "ts-frontend:watch": "tsc -p src/frontend/tsconfig.json --watch",
+    "build-css": "node-sass src/frontend/sass -o public/stylesheets",
+    "build-css:watch": "npm run build-css && node-sass src/frontend/sass -wo public/stylesheets"
+  },
+  "dependencies": {
+    "@types/cookie-parser": "^1.4.2",
+    "@types/errorhandler": "0.0.32",
+    "@types/mongodb": "^3.3.5",
+    "@types/morgan": "^1.7.37",
+    "cookie-parser": "~1.4.4",
+    "debug": "^4.1.1",
+    "errorhandler": "^1.5.1",
+    "express": "^4.17.1",
+    "http-errors": "^1.7.3",
+    "mongodb": "^3.3.2",
+    "morgan": "~1.9.1",
+    "pug": "^2.0.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.3",
+    "node-sass": "^4.12.0"
+  }
+}

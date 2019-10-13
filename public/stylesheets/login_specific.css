@@ -1,0 +1,16 @@
+/* Stylesheet used the login page */
+/* Form Styling */
+#loginForm {
+  width: 40%; }
+  #loginForm input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; }
+    #loginForm input[type=submit] {
+      color: whitesmoke;
+      background-color: #333;
+      cursor: pointer; }

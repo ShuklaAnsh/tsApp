@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "outDir": "../../public/javascript",
+    "rootDir": "./client_logic/",
+    "strict": true,
+    "esModuleInterop": true,
+    "inlineSources": true,
+    "sourceMap": true
+  },
+  "exclude": [
+    "**/*.test.ts"
+  ]
+}

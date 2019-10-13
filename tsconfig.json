@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "inlineSources": true,
+    "sourceMap": true
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts",
+    "src/frontend/client_logic"
+  ]
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"map.js","sourceRoot":"","sources":["../../client_logic/map.ts"],"names":[],"mappings":";AAAA,SAAS,KAAK,CAAC,IAAuB;IAAvB,qBAAA,EAAA,cAAuB;IAClC,OAAO,CAAC,GAAG,CAAC,QAAQ,GAAG,IAAI,CAAC,CAAC;AACjC,CAAC","sourcesContent":["function hello(name : String = \"world\"){\n    console.log(\"hello \" + name);\n}"]}
