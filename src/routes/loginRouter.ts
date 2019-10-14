@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { BaseRoute } from "./route";
-import DbClient = require("../DbClient");
+import User = require("../models/user.model");
+import { userInterface } from "../models/user.interface";
 /**
  * / route
  *
@@ -71,6 +72,13 @@ export class LoginRoute extends BaseRoute {
      */
     public attemptLogin(req: Request, res: Response, next: NextFunction) {
         console.log(req.body);
+        User.getUser(req.body.username, req.body.password).then(user => {
+            if(user){
+                // successfull
+            } else {
+                // unable to login
+            }
+        });
         //set custom title
         this.title = "Login Page";
         //set message
@@ -78,28 +86,7 @@ export class LoginRoute extends BaseRoute {
             page : 'login',
             message: "Attempting to login"
         };
-        DbClient.connect()
-            .then((db) => {
-                return db!.collection("users").find({
-                    username: req.body.username_field,
-                    password: req.body.pw_field,
-                }).toArray();
-            })
-            .then((result : any) => {
-                if(result.length === 0){
-                    console.log("User not found");
-                    res.send({
-                        mode: 'error',
-                        msg: 'Username or password incorrect'
-                    });
-                } else{
-                    console.log(result);
-                    res.send(result);
-                };
-            })
-            .catch((error) => {
-                console.log(error.message);
-            });
+
         //render template
         this.render(req, res, "login", options);
     }
