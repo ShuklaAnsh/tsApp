@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for src/routes/index.ts</title>
+    <title>Code coverage report for src/routes/campaignRouter.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -16,7 +16,7 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../index.html">All files</a> / <a href="index.html">src/routes</a> index.ts
+      <a href="../../index.html">All files</a> / <a href="index.html">src/routes</a> campaignRouter.ts
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
@@ -164,35 +164,35 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import { NextFunction, Request, Response, Router } from "express";
 import { BaseRoute } from "./route";
-&nbsp;
+import { userInterface } from "../models/user.interface";
 /**
  * / route
  *
- * @class IndexRoute
+ * @class CampaignRoute
  */
-export class IndexRoute extends BaseRoute {
+export class CampaignRoute extends BaseRoute {
 &nbsp;
     /**
      * Create the routes.
      *
-     * @class IndexRoute
+     * @class CampaignRoute
      * @method create
      * @static
      */
     public static create(router: Router) {
         //log
-        console.log("[IndexRoute::create] Creating index route.");
+        console.log("[CampaignRoute::create] Creating campaign route.");
 &nbsp;
         //add home page route
-        router.get("/", <span class="fstat-no" title="function not covered" >(r</span>eq: Request, res: Response, next: NextFunction) =&gt; {
-<span class="cstat-no" title="statement not covered" >            new IndexRoute().index(req, res, next);</span>
+        router.get("/campaign", <span class="fstat-no" title="function not covered" >(r</span>eq: Request, res: Response, next: NextFunction) =&gt; {
+<span class="cstat-no" title="statement not covered" >            new CampaignRoute().renderCampaignPage(req, res, next);</span>
         });
     }
 &nbsp;
     /**
      * Constructor
      *
-     * @class IndexRoute
+     * @class CampaignRoute
      * @constructor
      */
 <span class="fstat-no" title="function not covered" >    constructor() {</span>
@@ -200,25 +200,25 @@ export class IndexRoute extends BaseRoute {
     }
 &nbsp;
     /**
-     * The home page route.
+     * The Login page route.
      *
-     * @class IndexRoute
-     * @method index
+     * @class CampaignRoute
+     * @method renderCampaignPage
      * @param req {Request} The express Request object.
      * @param res {Response} The express Response object.
      * @param next {NextFunction} Execute the next method.
      */
-<span class="fstat-no" title="function not covered" >    public i</span>ndex(req: Request, res: Response, next: NextFunction) {
+<span class="fstat-no" title="function not covered" >    public r</span>enderCampaignPage(req: Request, res: Response, next: NextFunction) {
         //set custom title
-<span class="cstat-no" title="statement not covered" >        this.title = "App Name | Home";</span>
-&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.title = "Campaign Page";</span>
+        //set message
         let options: Object = <span class="cstat-no" title="statement not covered" >{</span>
-            page : 'index',
-            message: "This is the home page"
+            page : 'campaign',
+            message: "This is the Campaign Page",
+            user: req.session!.user
         };
-&nbsp;
         //render template
-<span class="cstat-no" title="statement not covered" >        this.render(req, res, "index", options);</span>
+<span class="cstat-no" title="statement not covered" >        this.render(req, res, "campaign", options);</span>
     }
 }</pre></td></tr>
 </table></pre>
