@@ -1,6 +1,5 @@
 
 import { NextFunction, Request, Response } from "express";
-
 /**
  * Constructor
  *
@@ -21,7 +20,7 @@ export class BaseRoute {
      */
     constructor() {
         //initialize variables
-        this.title = "My New TypeScript Web app";
+        this.title = "Creatures & Caves";
         this.scripts = [];
     }
 
@@ -45,7 +44,7 @@ export class BaseRoute {
      * @method render
      * @param req {Request} The request object.
      * @param res {Response} The response object.
-     * @param view {String} The view to render.
+     * @param view {string} The view to render.
      * @param options {Object} Additional options to append to the view's local scope.
      * @return void
      */
@@ -59,7 +58,22 @@ export class BaseRoute {
         //add title
         res.locals.title = this.title;
 
+        res.locals.user = req.session!.user;
+
         //render view
         res.render(view, options);
+    }
+
+    /**
+     * Redirect to another endpoint
+     *
+     * @class BaseRoute
+     * @method redirect
+     * @param res {Response} The response object.
+     * @param url {string} The url to redirect to.
+     * @return void
+     */
+    public redirect(res: Response, url: string) {
+        res.redirect(url)
     }
 }

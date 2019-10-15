@@ -4,10 +4,20 @@ block append head
     link(rel='stylesheet', href='/stylesheets/login_specific.css')
 
 block content
-    div(id='loginForm')
-            h1 creating
-            form(method='post' action='/login/attempt')
+    h1= title
+    unless create
+        div(id='loginForm')
+            form(method='post' action='/login')
                 input(id='username' type='text' name='username' placeholder='Username')
                 input(id='password' type='password' name='password' placeholder='Password')
                 input(id='loginBtn' type='submit' value='Login')
-                input(id='createBtn' type='submit' value='Create' formaction='/login/create')
+            p New to Creatures & Caves? Sign up 
+                a(href='/create') here
+    else if create
+        div(id='createForm')
+            form(method='post' action='/create')
+                input(id='username' type='text' name='username' placeholder='Username')
+                input(id='password' type='password' name='password' placeholder='Password')
+                input(id='confirm_pw' type='confirm_pw' name='confirm_pw' placeholder='Confirm Password')
+                //- TODO: frontend script to check if passwords match
+                input(id='loginBtn' type='submit' value='Create Account')

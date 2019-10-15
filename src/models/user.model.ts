@@ -1,35 +1,43 @@
 import DbClient = require("../DbClient");
 import { userInterface } from "./user.interface";
-import { resolve } from "url";
 
 class User {
-    user ?: userInterface;
-    
-    async getUser(username: String, password: String){
+    async getUser(username: string, password: string){
+        let user : userInterface | null = null;
         await DbClient.connect()
         .then((db) => {
-            return db!.collection("users").find({
+            return db!.collection("users").findOne({
                 username: username,
                 password: password,
-            }).toArray();
+            });
         })
         .then((result : any) => {
-            if(result.length === 0){
-            } else{
-                let user : userInterface = {    
-                    firstName : result[0].firstName,
-                    lastName : result[0].lastName,
-                    id : result[0].id,
-                    username : result[0].firstName
+            if(result){
+                user = {    
+                    firstName : result.firstName,
+                    lastName : result.lastName,
+                    id : result.id,
+                    username : result.firstName
                 };
-                this.user = user;
             };
         })
         .catch((error) => {
             console.log(error.message);
         });
-        return this.user;
+        return user;
     }    
+
+    async createUser(newUser : userInterface) {
+
+    }
+
+    async deleteUser(userID : string){
+
+    }
+    
+    async editUser(user : userInterface){
+
+    }
 }
 
 export = new User();

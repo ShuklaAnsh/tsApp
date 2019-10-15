@@ -1,5 +1,5 @@
 {
-  "name": "tsApp",
+  "name": "creatures_and_caves",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -14,12 +14,14 @@
   "dependencies": {
     "@types/cookie-parser": "^1.4.2",
     "@types/errorhandler": "0.0.32",
+    "@types/express-session": "^1.15.15",
     "@types/mongodb": "^3.3.5",
     "@types/morgan": "^1.7.37",
     "cookie-parser": "~1.4.4",
     "debug": "^4.1.1",
     "errorhandler": "^1.5.1",
     "express": "^4.17.1",
+    "express-session": "^1.17.0",
     "http-errors": "^1.7.3",
     "mongodb": "^3.3.2",
     "morgan": "~1.9.1",

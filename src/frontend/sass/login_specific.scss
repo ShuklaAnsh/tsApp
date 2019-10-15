@@ -1,8 +1,16 @@
+@import './partials/colours';
 /* Stylesheet used the login page */
 
 /* Form Styling */
-#loginForm{
+form{
     width: 40%;
+    p {
+        text-align: center;
+        a {
+            text-decoration: none;
+            color: $accent-colour;
+        }
+    }
     input {
         width: 100%;
         padding: 12px 20px;
@@ -13,8 +21,8 @@
         box-sizing: border-box;
         
         &[type=submit] {
-            color: whitesmoke;
-            background-color: #333;
+            color: $background-colour;
+            background-color: $main-colour;
             cursor: pointer;
         }
     }

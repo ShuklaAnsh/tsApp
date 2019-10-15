@@ -47,5 +47,5 @@ nav {
   cursor: pointer; }
 
 .nb-active a {
-  background-color: yellow;
+  background-color: palevioletred;
   color: #333; }

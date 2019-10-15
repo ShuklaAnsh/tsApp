@@ -4,9 +4,11 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import logger from "morgan";
 import path from "path";
+import session from "express-session";
 import errorHandler from "errorhandler";
 import { IndexRoute } from "./routes/index";
 import { LoginRoute } from "./routes/loginRouter";
+import { CampaignRoute } from "./routes/campaignRouter";
 import { MapRoute } from "./routes/mapRouter";
 
 /**
@@ -54,6 +56,11 @@ export class Server {
      * @method config
      */
     public config() {
+        this.app.use(session({
+            resave: true,
+            saveUninitialized: false,
+            secret: 'seng350'
+        }));
         //add static paths
         console.log(__dirname);
         this.app.use(express.static(path.join(__dirname, "../public")));
@@ -98,6 +105,7 @@ export class Server {
 
         IndexRoute.create(router);
         LoginRoute.create(router);
+        CampaignRoute.create(router);
         MapRoute.create(router);
 
         //use router middleware

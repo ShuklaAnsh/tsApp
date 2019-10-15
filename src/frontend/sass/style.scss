@@ -1,3 +1,5 @@
+@import "./partials/colours";
+
 /* Stylesheet used for all common styles */
 /* TODO: Grid to organize main componnets (header, menu, left, right, footer, etc) */
 * {
@@ -9,8 +11,8 @@
   body {
     padding: 25px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    background-color: whitesmoke;
-    color: #333;
+    background-color: $background-colour;
+    color: $main-colour;
   }
   
   /**** Page layout ****/
@@ -20,14 +22,14 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    background-color: #333;
+    background-color: $main-colour;
     margin-bottom: 10px;
   }
   
   #nb-logo p{
     padding-left: 15px;
     display: inline-block;
-    color: whitesmoke;
+    color: $background-colour;
     font-size: 24px;
     text-transform: capitalize;
     font-variant:small-caps;
@@ -43,18 +45,18 @@
     line-height: 25px;
     padding: 5px 10px;
     text-decoration: none;
-    color:whitesmoke;
+    color:$background-colour;
     text-transform: uppercase;
   }
   
   .nb-item:not(.nb-active) a:hover {
-    background-color: whitesmoke;
-    color: #333;
+    background-color: $background-colour;
+    color: $main-colour;
     cursor: pointer;
   }
   
   .nb-active a{
-    background-color: yellow;
-    color: #333;
+    background-color: $accent-colour;
+    color: $main-colour;
   }
   
