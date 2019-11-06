@@ -1,35 +1,35 @@
-/*
-
-Filename: mapRouter.ts
-
-// TODO: Add relevant file header
-
+/**
+ * Routes for admin user
+ * TODO: add more meaningful information
+ *
  */
+
 import { NextFunction, Request, Response, Router } from 'express';
 
-import { BaseRoute } from './baseRouter';
+import DbClient = require('../DbClient');
 
+import { BaseRoute } from './baseRouter';
 /**
  * / route
  *
- * @class MapRoute
+ * @class AdminRoute
  */
-export class MapRoute extends BaseRoute {
+export class AdminRoute extends BaseRoute {
 
     /**
      * Create the routes.
      *
-     * @class MapRoute
+     * @class AdminRoute
      * @method create
      * @static
      */
     static create(router: Router) {
         //log
-        console.log('[MapRoute::create] Creating map route.');
+        console.log('[AdminRoute::create] Creating Admin route.');
 
         //add home page route
-        router.get('/map', (req: Request, res: Response, next: NextFunction) => {
-            new MapRoute().create(req, res, next);
+        router.get('/admin', (req: Request, res: Response, next: NextFunction) => {
+            new AdminRoute().create(req, res, next);
         });
 
     }
@@ -37,7 +37,7 @@ export class MapRoute extends BaseRoute {
     /**
      * Constructor
      *
-     * @class LoginRoute
+     * @class AdminRoute
      * @constructor
      */
     constructor() {
@@ -45,9 +45,9 @@ export class MapRoute extends BaseRoute {
     }
 
     /**
-     * The Map page route.
+     * The Admin page route.
      *
-     * @class LoginRoute
+     * @class AdminRoute
      * @method create
      * @param req {Request} The express Request object.
      * @param res {Response} The express Response object.
@@ -55,13 +55,13 @@ export class MapRoute extends BaseRoute {
      */
     create(req: Request, res: Response, next: NextFunction) {
         //set custom title
-        this.title = 'Map Page';
+        this.title = 'Admin Page';
         //set message
         const options: Object = {
-            page : 'map',
-            message: 'This is the map page'
+            page : 'admin',
+            message: 'Welcome to Admin Toolkit'
         };
         //render template
-        this.render(req, res, 'map', options);
+        this.render(req, res, 'admin', options);
     }
 }

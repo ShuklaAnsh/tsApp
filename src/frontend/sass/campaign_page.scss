@@ -1,0 +1,158 @@
+@import './partials/colours';
+@import './partials/sidebar';
+@import './partials/form';
+
+#campaign-details-info-form-container{
+    @include flexed-center;
+}
+
+#campaign-details-info-form {
+    @include info-form($accent-colour, $background-colour);
+}
+
+#details-btn-container {
+    @include flexed-center;
+
+    #detail-save-btn{
+        display: none;
+    }
+
+}
+
+#campaign-delete-btn-container {
+    @include flexed-center;
+    margin-top: 10px;
+    flex-direction: column;
+    align-items: center;
+
+    #campaign-delete-warning {
+        span {
+            color: red;
+            font-weight: bold;
+        }
+    }
+
+    #campaign-delete-btn{
+        background-color: red;
+
+        &:hover {
+            background-color: lightpink;
+            font-weight: bold;
+        }
+    }
+}
+
+.detail-btn {
+    @include button($main-colour, $background-colour);
+}
+
+.disable-edit {
+    @include disable-edit;
+}
+
+.enable-edit {
+    @include enable-edit;
+}
+
+.campaign-container {
+    display: flex;
+    @include sidebar($main-colour, $background-colour, $accent-colour);
+        
+    .campaign-contents-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: calc(100vh - 100px);
+        width: 100%;
+        margin-left: 10px;
+        
+        #campaign-header {
+            padding: 8px;
+            background-color: $main-colour;
+            color: $background-colour;
+            display: grid;
+            grid-template-columns: 10fr 4fr;
+            #session-nav-buttons-container {
+                display: flex;
+                justify-content: flex-end;
+                .session-nav-button {
+                    margin-left: 8px;
+                    padding: 8px;
+                    text-align: center;
+                    background-color: $background-colour;
+                    color: $main-colour;
+                    &:hover {
+                        cursor: pointer;
+                        color: $background-colour;
+                        background-color: $accent-colour;
+                    }
+                }
+            }
+        }
+        
+        .session-items-container {
+            display: flex;
+            .session-item-container {
+                margin-right: 8px;
+                .session-item-label {
+                    display:inline-block;
+                    padding: 8px;
+                    background-color: $accent-colour;
+                }
+                .session-item {
+                    display:inline-block;
+                }
+                .session-non-editable-item {
+                    padding: 8px;
+                    background-color: #ccc;
+                    color: black;
+                }
+                .session-editable-item {
+                    height: 100%;
+                    padding: 5px;
+                    width: 100px;
+                    background-color: $background-colour;
+                    color: black;
+                }
+            }
+        }
+
+        #campaign-session-details {
+            background-color: $main-colour;
+            color: $background-colour;
+            margin-top: 10px;
+            padding: 8px;
+            height: calc(50vh - 100px);
+            overflow: scroll;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        
+        #campaign-tools-container {
+            display: flex;
+            margin-top: 10px;
+            height: 50vh;
+            
+            #campaign-plans-container {
+                background-color: $main-colour;
+                color: $background-colour;
+                padding: 8px;
+                width: 50%;
+
+                textarea{
+                    width: 100%;
+                    max-width: 100%;
+                    max-height: 75%;
+                }
+            }
+            
+            #campaign-random-generators-container {
+                background-color: $main-colour;
+                color: $background-colour;
+                margin-left: 10px;
+                padding: 8px;
+                width: 50%;
+            }
+        }
+    }
+}

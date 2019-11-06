@@ -1,0 +1,39 @@
+@import './partials/colours';
+/* Stylesheet used the login page */
+
+/* Form Styling */
+#login-form-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .login-page-form{
+        width: 60%;
+        .error_msg {
+            font-weight: bold;
+            color: $error-msg-color;
+        }
+        p {
+            text-align: center;
+            a {
+                text-decoration: none;
+                color: $accent-colour;
+            }
+        }
+        input {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            
+            &[type=submit] {
+                color: $background-colour;
+                background-color: $main-colour;
+                cursor: pointer;
+            }
+        }
+    }
+}

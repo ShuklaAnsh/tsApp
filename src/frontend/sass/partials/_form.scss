@@ -1,0 +1,119 @@
+@mixin form-input {
+    input[type="text"], textarea{
+        box-sizing: border-box;
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+}
+
+@mixin form-submit($text-colour, $background-colour){
+    input[type="submit"] {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        color: $text-colour;
+        background-color: $background-colour;
+        cursor: pointer;
+        
+        &:hover {
+            background-color: darken($color: #333, $amount: 70%);
+        }
+    }
+}
+
+@mixin form-button($text-colour, $background-colour){
+    input[type="button"] {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        color: $text-colour;
+        background-color: $background-colour;
+        cursor: pointer;
+        
+        &:hover {
+            background-color: darken($color: $background-colour, $amount: 70%);
+        }
+    }
+}
+
+@mixin info-form($background-colour, $text-colour) {
+    display: grid;
+    width: 50%;
+    grid-template-columns: auto 1fr;
+
+    @include label($background-colour, $text-colour);
+
+    input[type=text], textarea {
+        font-size: 16px;
+        max-width: 100%;
+    }
+}
+
+@mixin label($background-colour, $text-colour){
+    label {
+        text-align: center;
+        font-size: 16px;
+        background: $background-colour;
+        color: $text-colour;
+        padding: 12px 20px;
+        margin: 8px 0;
+    }
+}
+
+@mixin flexed-center {
+    display: flex;
+    justify-content: center;
+}
+
+@mixin button($background-colour, $text-colour) {
+    text-align: center;
+    width: 150px;
+    padding: 12px 20px;
+    margin: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: $background-colour;
+    color: $text-colour;
+    &:hover {
+        cursor: pointer;
+        background-color: $text-colour;
+        color: $background-colour;
+    }
+}
+
+@mixin disable-edit {
+    *:focus {
+        outline: none;
+    }
+    *{
+        cursor:default;
+    }
+    input {
+        padding: 12px 20px;
+        margin: 8px 0;
+        border: 0px;
+        background-color: #e7e7e7;
+    }
+}
+
+@mixin enable-edit {
+    input {
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+}

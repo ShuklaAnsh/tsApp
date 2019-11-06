@@ -1,0 +1,21 @@
+extends layout
+
+block append head
+    script(type='text/javascript' src='/javascript/campaigns.js')
+    link(rel='stylesheet', href='/stylesheets/campaigns_page.css')
+
+block content
+  h2 Your Campaigns
+  div(id='campaign-container')
+    div(id='add-button' onclick="openCreateCampaginForm()") 
+      p(class='not-selectable' id='add-button-text' onclick='') &#43;
+  div(id='create-campaign-modal')
+
+  div(id='create-campaign-form-container')
+    form(id='create-campaign-form' action='/campaign', method='post')
+      h2(id='create-campaign-title') New Campaign
+      input(id='campaign-name-field' type='text', name='name', placeholder='Enter Campaign Name' required)
+      textarea(id='campaign-description-field' rows='5' cols='10' name='description', placeholder='(Optional) Description')
+      input(id='campaign-create-button' type='submit' value='Create')
+      input(id='campaign-cancel-button' type='button' value='Cancel' onclick="cancelCreateCampaign()")
+  script generateCards(!{JSON.stringify(campaigns)});

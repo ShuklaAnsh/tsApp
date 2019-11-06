@@ -1,5 +1,11 @@
+/*
 
-import { NextFunction, Request, Response } from "express";
+Filename: route.ts
+
+//TODO: Add relevant file header
+
+ */
+import { NextFunction, Request, Response } from 'express';
 /**
  * Constructor
  *
@@ -11,7 +17,6 @@ export class BaseRoute {
 
     private scripts: string[];
 
-
     /**
      * Constructor
      *
@@ -20,7 +25,7 @@ export class BaseRoute {
      */
     constructor() {
         //initialize variables
-        this.title = "Creatures & Caves";
+        this.title = 'Creatures & Caves';
         this.scripts = [];
     }
 
@@ -32,7 +37,7 @@ export class BaseRoute {
      * @param src {string} The src to the external JS file.
      * @return {BaseRoute} Self for chaining
      */
-    public addScript(src: string): BaseRoute {
+    addScript(src: string): BaseRoute  {
         this.scripts.push(src);
         return this;
     }
@@ -48,18 +53,17 @@ export class BaseRoute {
      * @param options {Object} Additional options to append to the view's local scope.
      * @return void
      */
-    public render(req: Request, res: Response, view: string, options?: Object) {
+    render(req: Request, res: Response, view: string, options?: Object)  {
         //add constants
-        res.locals.BASE_URL = "/";
+        res.locals.BASE_URL = '/';
 
         //add scripts
         res.locals.scripts = this.scripts;
 
         //add title
         res.locals.title = this.title;
-
+        res.locals.session = req.session;
         res.locals.user = req.session!.user;
-
         //render view
         res.render(view, options);
     }
@@ -73,7 +77,7 @@ export class BaseRoute {
      * @param url {string} The url to redirect to.
      * @return void
      */
-    public redirect(res: Response, url: string) {
-        res.redirect(url)
+    redirect(res: Response, url: string) {
+        res.redirect(url);
     }
 }

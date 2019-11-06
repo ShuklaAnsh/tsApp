@@ -1,15 +1,21 @@
 
-import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";
-import express from "express";
-import logger from "morgan";
-import path from "path";
-import session from "express-session";
-import errorHandler from "errorhandler";
-import { IndexRoute } from "./routes/index";
-import { LoginRoute } from "./routes/loginRouter";
-import { CampaignRoute } from "./routes/campaignRouter";
-import { MapRoute } from "./routes/mapRouter";
+/**
+ * app
+ */
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import errorHandler from 'errorhandler';
+import express from 'express';
+import session from 'express-session';
+import logger from 'morgan';
+import path from 'path';
+
+import { AdminRoute } from './routes/adminRouter';
+import { CampaignsRoute } from './routes/campaignsRouter';
+import { IndexRoute } from './routes/indexRouter';
+import { LoginRoute } from './routes/loginRouter';
+import { MapRoute } from './routes/mapRouter';
+import { ProfileRoute } from './routes/profileRouter';
 
 /**
  * The server.
@@ -18,7 +24,7 @@ import { MapRoute } from "./routes/mapRouter";
  */
 export class Server {
 
-    public app: express.Application;
+    app: express.Application;
 
     /**
      * Bootstrap the application.
@@ -28,7 +34,7 @@ export class Server {
      * @static
      * @return {Server} Returns the newly created Server instance for this app.
      */
-    public static bootstrap(): Server {
+    static bootstrap(): Server {
         return new Server();
     }
 
@@ -55,7 +61,9 @@ export class Server {
      * @class Server
      * @method config
      */
-    public config() {
+    config() {
+        process.env.MONGO_URL = 'mongodb+srv://admin:Passw0rd@cluster0-ljzjx.mongodb.net/admin?retryWrites=true&w=majority';
+
         this.app.use(session({
             resave: true,
             saveUninitialized: false,
@@ -63,14 +71,14 @@ export class Server {
         }));
         //add static paths
         console.log(__dirname);
-        this.app.use(express.static(path.join(__dirname, "../public")));
+        this.app.use(express.static(path.join(__dirname, '../public')));
 
         //configure pug
-        this.app.set("views", path.join(__dirname, "../views"));
-        this.app.set("view engine", "pug");
+        this.app.set('views', path.join(__dirname, '../views'));
+        this.app.set('view engine', 'pug');
 
         //mount logger
-        this.app.use(logger("dev"));
+        this.app.use(logger('dev'));
 
         //mount json form parser
         this.app.use(bodyParser.json());
@@ -81,7 +89,7 @@ export class Server {
         }));
 
         //mount cookie parser middleware
-        this.app.use(cookieParser("SECRET_GOES_HERE"));
+        this.app.use(cookieParser('SECRET_GOES_HERE'));
 
         // catch 404 and forward to error handler
         this.app.use(function(err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
@@ -101,11 +109,13 @@ export class Server {
      * @return void
      */
     private routes() {
-        let router:express.Router = express.Router();
+        const router: express.Router = express.Router();
 
         IndexRoute.create(router);
         LoginRoute.create(router);
-        CampaignRoute.create(router);
+        CampaignsRoute.create(router);
+        AdminRoute.create(router);
+        ProfileRoute.create(router);
         MapRoute.create(router);
 
         //use router middleware

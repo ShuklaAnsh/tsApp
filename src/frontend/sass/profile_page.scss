@@ -1,0 +1,56 @@
+@import './partials/colours';
+@import './partials/form';
+
+#profile-info-form-container{
+    @include flexed-center;
+}
+
+#profile-info-form {
+    @include info-form($accent-colour, $background-colour);
+}
+
+#profile-btn-container {
+    @include flexed-center;
+
+    #profile-save-btn{
+        display: none;
+    }
+
+}
+
+#profile-delete-btn-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    #profile-delete-warning {
+        span {
+            color: red;
+            font-weight: bold;
+        }
+    }
+
+    #profile-delete-btn{
+        background-color: red;
+
+        &:hover {
+            background-color: lightpink;
+            font-weight: bold;
+        }
+    }
+
+}
+
+.profile-btn {
+    @include button($main-colour, $background-colour);
+}
+
+.disable-edit {
+    @include disable-edit;
+}
+
+.enable-edit {
+    @include enable-edit;
+}

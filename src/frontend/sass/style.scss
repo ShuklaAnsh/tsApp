@@ -2,10 +2,11 @@
 
 /* Stylesheet used for all common styles */
 /* TODO: Grid to organize main componnets (header, menu, left, right, footer, etc) */
+
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box
+    box-sizing: border-box;
   }
   
   body {
@@ -34,6 +35,66 @@
     text-transform: capitalize;
     font-variant:small-caps;
   }
+
+  #nb-profile {
+    #nb-profile-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      #nb-profile-pic {
+        width: 20px;
+        height: 20px;
+        background-color: red;
+        border-radius: 100%;
+        margin-left: 10px;
+      }
+      p {
+        display: inline-block;
+        line-height: 25px;
+        padding: 5px 10px;
+        text-decoration: none;
+        color:$background-colour;
+        text-transform: uppercase;
+      }
+    }
+
+    .nb-profile-dropdown{
+      display: none;
+      position: absolute;
+      right: 25px;
+      background-color: $main-colour;
+      min-width: 150px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    
+      a{
+        display: block;
+        line-height: 25px;
+        padding: 5px 10px;
+        text-decoration: none;
+        color:$background-colour;
+        text-transform: uppercase;
+        float: none;
+        text-align: center;
+      }
+    }
+
+    &:hover {
+      background-color: $accent-colour;
+      cursor: pointer;
+
+      .nb-profile-dropdown{
+        display: block;
+        color:$background-colour;
+        text-transform: uppercase;
+
+        a:hover {
+          background-color: $accent-colour;
+          cursor: pointer;
+        }
+      }
+    }
+  }
   
   .nb-list{
     display: flex;
@@ -47,16 +108,23 @@
     text-decoration: none;
     color:$background-colour;
     text-transform: uppercase;
+    border-right: 1px solid $background-colour;
+  }
+  
+  .nb-item:first-child {
+    border-left: 1px solid $background-colour;
   }
   
   .nb-item:not(.nb-active) a:hover {
-    background-color: $background-colour;
-    color: $main-colour;
+    background-color: $accent-colour;
     cursor: pointer;
   }
   
   .nb-active a{
-    background-color: $accent-colour;
+    background-color: $background-colour;
     color: $main-colour;
   }
-  
+
+  .not-selectable {
+    user-select: none;
+  }

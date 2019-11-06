@@ -8,12 +8,27 @@ mixin nav(user)
               a(href = (page === 'index' ? '#' : '/')) home
             li(class=(page === 'others' ? 'nb-item nb-active' : 'nb-item'))
               a(href = (page === 'others' ? '#' : '#')) others
-            li(class=(page === 'campaign' ? 'nb-item nb-active' : 'nb-item'))
-              a(href = (page === 'campaign' ? '#' : '/campaign')) campaign
+            li(class=(page === 'campaigns' ? 'nb-item nb-active' : 'nb-item'))
+              a(href = (page === 'campaigns' ? '#' : '/campaigns')) campaigns
             li(class=(page === 'map' ? 'nb-item nb-active' : 'nb-item'))
               a(href = (page === 'map' ? '#' : '/map')) map
+            if user.username === 'admin'
+              div(id='nb-profile')
+                div(id='nb-profile-container')
+                  div(id='nb-profile-pic')
+                  p= "Admin"
+                div(class="nb-profile-dropdown")
+                  a(href = '/admin') Admin Tools
+                  a(href = '/logout') Logout
+            else 
+              div(id='nb-profile')
+                div(id='nb-profile-container')
+                  div(id='nb-profile-pic')
+                  p= user.username
+                div(class="nb-profile-dropdown")
+                  a(href = '/profile') Profile
+                  a(href = '/logout') Logout
             li(class='nb-item')
-              a(href = '/logout') Logout
     else
       nav
         div(id='nb-logo')
@@ -22,4 +37,4 @@ mixin nav(user)
             li(class=(page === 'index' ? 'nb-item nb-active' : 'nb-item'))
               a(href = (page === 'index' ? '#' : '/')) home
             li(class=(page === 'login' ? 'nb-item nb-active' : 'nb-item'))
-              a(href = (page === 'login' ? '#' : '/login')) login
+              a(href = '/login') login

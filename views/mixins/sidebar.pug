@@ -1,0 +1,22 @@
+mixin sidebar(active)
+    div(id='campaign-sidebar-container')
+        ul(id='campaign-sidebar')
+            li(id='campaign-sidebar-sessions' class='campaign-sidebar-item')
+                a(href = '/campaign/'+session.campaign.name+'/sessions') Sessions
+            li(id='campaign-sidebar-details' class='campaign-sidebar-item')
+                a(href = '/campaign/'+session.campaign.name+'/details') Details
+            li(id='campaign-sidebar-calender' class='campaign-sidebar-item')
+                a(href = '/campaign/'+session.campaign.name+'/calendar') Calendar
+            li(id='campaign-sidebar-maps' class='campaign-sidebar-item')
+                a(href = '/campaign/'+session.campaign.name+'/maps') Maps
+            li(id='campaign-sidebar-items' class='campaign-sidebar-item')
+                a(href = '/campaign/'+session.campaign.name+'/items') Items
+            li(id='campaign-sidebar-characters' class='campaign-sidebar-item')
+                a(href = '/campaign/'+session.campaign.name+'/characters') Characters
+            li(id='campaign-sidebar-help' class='campaign-sidebar-item')
+                a(href = '/campaign/'+session.campaign.name+'/help') Help
+    script.
+        console.log(!{JSON.stringify(session.campaign)})
+        var activeElem = document.getElementById('campaign-sidebar-!{active}');
+        activeElem.firstElementChild.setAttribute('href', '#');
+        activeElem.classList.add('campaign-sidebar-active');

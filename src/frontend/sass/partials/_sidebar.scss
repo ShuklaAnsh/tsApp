@@ -1,0 +1,46 @@
+@mixin sidebar($main-colour, $background-colour, $accent-colour){
+    #campaign-sidebar-container{
+        height: calc(100vh - 100px);
+        background-color: $main-colour;
+        #campaign-sidebar {
+            list-style: none;
+            hr {
+                color: $background-colour;
+                height: 1px;
+            }
+            &:first-child {
+                margin-top: 5px;
+            }
+            &:last-child {
+                border-bottom: 2px solid $background-colour;
+            }
+            .campaign-sidebar-item {
+                a {
+                    width: 100%;
+                    display: inline-block;
+                    line-height: 25px;
+                    padding: 5px 10px;
+                    text-decoration: none;
+                    color:$background-colour;
+                    text-transform: uppercase;
+                    border-top: 2px solid $background-colour;
+                    &:hover {
+                        cursor: pointer;
+                        background-color: $accent-colour;
+                    }
+                }
+            }
+            .campaign-sidebar-active {
+                background-color: $background-colour;
+                a {
+                    color: $main-colour;
+                    &:hover {
+                        cursor: default;
+                        background-color: $background-colour;
+                        color: $main-colour;
+                    }
+                }
+            }
+        }
+    }
+}

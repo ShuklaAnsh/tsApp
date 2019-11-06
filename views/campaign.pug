@@ -1,5 +1,83 @@
 extends layout
+include mixins/sidebar
+
+block append head
+    script(type='text/javascript' src='/javascript/campaign.js')
+    link(rel='stylesheet', href='/stylesheets/campaign_page.css')
 
 block content
-  p= "Hello " + user.firstName 
+    div(class='campaign-container')
+        +sidebar("sessions")
+        div(class='campaign-contents-container')
+            div(id='campaign-header')
+                div(id='campaign-title-and-session-container')
+                    h2= session.campaign.name
+                    h3 Session 0
+                div(id='session-nav-buttons-container')
+                    div(id='last-session-button' class='session-nav-button') Last Session
+                    div(id='next-session-button' class='session-nav-button') Next Session
+            
+            div(id='campaign-session-details')
+                div(id='campaign-last-session-details')
+                    h3 Last Session Details
+                    div(class='session-items-container')
+                        div(class='session-item-container')
+                            div(class='session-item-label not-selectable') World Time
+                            div(class='session-non-editable-item session-item') TEST_VALUE
+                        div(class='session-item-container')
+                            div(class='session-item-label not-selectable') Location
+                            div(class='session-non-editable-item session-item') TEST_VALUE
+                        div(class='session-item-container')
+                            div(class='session-item-label not-selectable') Weather
+                            div(class='session-non-editable-item session-item') TEST_VALUE
+                    br
+                    h5 Recap
+                    p
+                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer a ullamcorper 
+                    | nulla. Morbi eget libero non orci malesuada pretium. Nam 
+                    | volutpat accumsan massa quis pellentesque. Praesent eget faucibus nulla. Cras n
+                    | ec turpis in ex aliquam laoreet sit amet ac metus. Sed non ullamcorper elit, vitae ornare ante. Integer non urna lobortis metus suscipit venenatis in id dolor. Praesent eu ipsum tincidunt, aliquam ipsum id, sodales diam. Aenean ac congue justo. Maecenas feugiat rutrum ligula, id rutrum purus. Pellentesque euismod fermentum quam, nec ultricies nulla tempor eu. Aenean eget faucibus purus, ac congue dolor. Nunc vehicula tortor vitae est elementum, ut consectetur mauris efficitur.
+                    | Suspendisse arcu diam, aliquam vel finibus vitae, volutpat sed est. Sed mollis,
+                br
+                div(id='campaign-current-session-details')
+                    h3 Current Session Details
+                    div(class='session-items-container')
+                        div(class='session-item-container')
+                            div(class='session-item-label not-selectable') World Time
+                            input(type='text' class='session-editable-item session-item' value='TEST_VALUE') 
+                        div(class='session-item-container')
+                            div(class='session-item-label not-selectable') Location
+                            input(type='text' class='session-editable-item session-item' value='TEST_VALUE') 
+                        div(class='session-item-container')
+                            div(class='session-item-label not-selectable') Weather
+                            input(type='text' class='session-editable-item session-item' value='TEST_VALUE') 
+                    button(id="session-save-btn") Save 
 
+            div(id='campaign-tools-container')     
+                div(id='campaign-plans-container')
+                    h2 Plans
+                    //- replace with todo list when have time
+                    textarea(id='campaign-plans')
+                    button(id='campaign-plans-save-btn') Save
+                div(id='campaign-random-generators-container')
+                    h2 Random Item
+                    label(for='Type') Type
+                    select(name="Type") 
+                        option(value="TEST1") TEST1
+                        option(value="TEST2") TEST2
+                        option(value="TEST3") TEST3
+                    button(id="item-generate-btn") Generate
+                    
+                    
+                    h2 Random Character
+                    label(for='Type') Type
+                    select(name="Type") 
+                        option(value="TEST1") TEST1
+                        option(value="TEST2") TEST2
+                        option(value="TEST3") TEST3
+                    label(for='Tier') Tier
+                    select(name="Tier") 
+                        option(value="TEST1") TEST1
+                        option(value="TEST2") TEST2
+                        option(value="TEST3") TEST3
+                    button(id="item-generate-btn") Generate

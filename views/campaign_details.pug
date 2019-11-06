@@ -1,0 +1,35 @@
+extends layout
+include mixins/sidebar
+
+block append head
+    script(type='text/javascript' src='/javascript/infoForm.js')
+    link(rel='stylesheet', href='/stylesheets/campaign_page.css')
+
+block content
+    div(class='campaign-container')
+        +sidebar("details")
+        div(class='campaign-contents-container')
+            div(id='campaign-header')
+                h2= session.campaign.name
+                h6= session.campaign.id
+            div(id='campaign-details-info-form-container')
+                form(id='campaign-details-info-form' action='/campaign/'+session.campaign.name+'/details', method='post' class='disable-edit')
+                    label Campaign Name  
+                    input(id='campaign_name_field' type='text', name='name', value=session.campaign.name readonly)
+                    label World Time
+                    input(id='campaign_world_time_field' type='text', name='world_time', value=session.campaign.worldTime readonly)
+                    label Description
+                    textarea(id='campaign_description_field' type='text', name='description' readonly) #{session.campaign.description}
+            div(id='details-btn-container')
+                div(class='detail-btn' id='detail-edit-btn' onclick='toggleEditMode("Edit Campaign")') Edit Campaign
+                div(class='detail-btn' id='detail-save-btn' onclick='save()') Save
+            p= session.message
+            script load(["campaign_name_field","campaign_world_time_field", "campaign_description_field"], "detail-edit-btn", "detail-save-btn", "campaign-details-info-form");
+            hr
+            form(id='campaign-delete-btn-container' action='/campaign/'+session.campaign.name+'/delete' method='post' onsubmit="return confirmDelete('Delete Campaign?')")
+                p(id='campaign-delete-warning')
+                    span Warning
+                    | : Deleting a campaign is not reversible.
+                
+                input(class='detail-btn' id='campaign-delete-btn' type='submit' value='Delete Campaign')
+

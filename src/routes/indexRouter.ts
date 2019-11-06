@@ -1,12 +1,20 @@
-import { NextFunction, Request, Response, Router } from "express";
-import { BaseRoute } from "./route";
+/*
+
+Filename: index.ts
+
+//TODO: Relevant file header
+
+ */
+import { NextFunction, Request, Response, Router } from 'express';
+
+import { BaseRoute } from './baseRouter';
 
 /**
  * / route
  *
  * @class IndexRoute
  */
-export class IndexRoute extends BaseRoute {
+export class IndexRoute extends BaseRoute  {
 
     /**
      * Create the routes.
@@ -15,12 +23,12 @@ export class IndexRoute extends BaseRoute {
      * @method create
      * @static
      */
-    public static create(router: Router) {
+    static create(router: Router)  {
         //log
-        console.log("[IndexRoute::create] Creating index route.");
+        console.log('[IndexRoute::create] Creating index route.');
 
         //add home page route
-        router.get("/", (req: Request, res: Response, next: NextFunction) => {
+        router.get('/', (req: Request, res: Response, next: NextFunction) => {
             new IndexRoute().index(req, res, next);
         });
     }
@@ -44,16 +52,16 @@ export class IndexRoute extends BaseRoute {
      * @param res {Response} The express Response object.
      * @param next {NextFunction} Execute the next method.
      */
-    public index(req: Request, res: Response, next: NextFunction) {
+    index(req: Request, res: Response, next: NextFunction)  {
         //set custom title
-        this.title = "App Name | Home";
+        this.title = 'App Name | Home';
 
-        let options: Object = {
+        const options: Object = {
             page : 'index',
-            message: "This is the home page"
+            message: 'This is the home page'
         };
 
         //render template
-        this.render(req, res, "index", options);
+        this.render(req, res, 'index', options);
     }
 }

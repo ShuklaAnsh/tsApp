@@ -1,0 +1,29 @@
+extends layout
+
+block append head
+    script(type='text/javascript' src='/javascript/infoForm.js')
+    link(rel='stylesheet', href='/stylesheets/profile_page.css')
+
+block content
+    div(id='profile-info-form-container')
+        form(id='profile-info-form' action='/profile', method='post' class='disable-edit')
+            label Username  
+            input(id='profile_username_field' type='text', name='username', value=user.username readonly)
+            label First Name
+            input(id='profile_firstName_field' type='text', name='firstName', value=user.firstName readonly)
+            label Last Name  
+            input(id='profile_lastName_field' type='text', name='lastName', value=user.lastName readonly)
+    div(id='profile-btn-container')
+        div(class='profile-btn' id='profile-edit-btn' onclick='toggleEditMode("Edit Profile")') Edit Profile
+        div(class='profile-btn' id='profile-save-btn' onclick='save()') Save
+    p= session.message
+    script load(["profile_username_field","profile_firstName_field","profile_lastName_field"], "profile-edit-btn", "profile-save-btn", "profile-info-form");
+    script load();
+    hr
+    form(id='profile-delete-btn-container' action="/profile/delete" method='post' onsubmit="return confirmDelete()")
+        p(id='profile-delete-warning')
+            span Warning
+            | : Deleting an account is not reversible.
+        
+        input(class='profile-btn' id='profile-delete-btn' type='submit' value='Delete Account')
+

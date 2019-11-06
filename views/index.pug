@@ -1,6 +1,30 @@
 extends layout
 
+block append head
+  link(rel='stylesheet', href='/stylesheets/overview_page.css')
+
 block content
-  h1(id='title') &lt;\AppName&gt;
-  div(id='banner')
+  div(class='main-content-container')
+    div(class='header')
+      p(id='blurb')
+      | Creatures & Caves provides a vast array of tools directly 
+      | aimed to make Game Masters lives easier during a tabletop 
+      | role playing games. Through the use of the many available 
+      | tools, Game Masters are able to entirely design their 
+      | campaigns the way they want while also being able to produce 
+      | random items, characters, and loot on the fly right from the
+      | session page. There are many more useful tools provided
+      | through Creatures&Caves all tailored for the Game Master
+      | waiting to be discovered and explored. 
+    
+    div(class='content-container' id='left-container')
+      ul(id='details-list')
+        li Multiple campaigns,
+        li multiple maps within a campaign,
+        li items,
+        li encounters, and
+        li characters of all types.
+    div(class='content-container' id='right-container')
+      p Something about the team?
+    div(class='content-container' id='background-container')
 
