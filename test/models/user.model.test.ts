@@ -1,42 +1,38 @@
 /**
  * Test suite for User Model
  */
-import mongoUnit from 'mongo-unit';
+import mongodb from 'mongodb';
 
+import DbClient from '../../src/DbClient';
 import { ReturnObject } from '../../src/models/common.interface';
 import mockCollections from '../mockCollections';
 import { UserInterface } from '../../src/models/user.interface';
 import UserModel from '../../src/models/user.model';
 
+let db: mongodb.Db | undefined;
 const mockUsers: any = mockCollections.mockUsers;
 
-beforeAll(async() => {
-    const mongoTestUrl: string = await mongoUnit.start({ 
-        dbName: 'Creatures&Caves',
-        verbose: true
-    });
-    process.env.MONGO_URL = mongoTestUrl;
-    console.log('Mock MongoClient started at -> ' + mongoTestUrl);
-    console.log('mock users collection\n' + JSON.stringify(mockUsers, null, 4));
+beforeAll(async () => {
+    db = await DbClient.connect();
+    await db!.createCollection('users');
 });
 
+beforeEach(async () => {
+    await db!.collection('users').insertMany(mockUsers);
+});
+
+afterEach(async () => {
+    await db!.collection('users').deleteMany({});
+});
+
+
 describe('User Model', () => {
-
-    beforeEach(async() => {
-        //reset mock collection
-        await mongoUnit.load(mockUsers);
-    });
-
-    afterEach(async () => {
-        //drop mock collection to disgard changes
-        await mongoUnit.drop();
-    });
 
     describe('getUser', () => {
 
         test('getUsers debug funtion should work', async() => {
             const users: any[] = await UserModel.getUsers();
-            expect(users.length).toEqual(mockUsers.users.length);
+            expect(users.length).toEqual(mockUsers.length);
             expect(users[0].username).toEqual('fullUser');
         });
 
@@ -139,7 +135,8 @@ describe('User Model', () => {
 
     afterAll(async() => {
         try {
-            await mongoUnit.stop();
+            await db!.dropCollection('users');
+            await DbClient.disconnect();
         } catch (error) {
             console.log(error);
         }

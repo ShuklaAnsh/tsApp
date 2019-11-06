@@ -6,8 +6,6 @@
 
 import { NextFunction, Request, Response, Router } from 'express';
 
-import DbClient = require('../DbClient');
-
 import { BaseRoute } from './baseRouter';
 /**
  * / route

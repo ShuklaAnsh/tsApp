@@ -3,7 +3,7 @@
  */
 import mongodb from 'mongodb';
 
-import DbClient = require('../DbClient');
+import DbClient from '../DbClient';
 
 import { ReturnObject } from './common.interface';
 import { UserInterface } from './user.interface';

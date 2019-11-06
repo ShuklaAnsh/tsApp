@@ -1,7 +1,6 @@
 node_modules/
 dist/
 .idea/ 
-.vscode
-coverage
-public/javascript
 public/stylesheets
+public/javascript
+coverage/

@@ -1,41 +1,38 @@
 /**
  * Test suite for Campaign Model
  */
-import mongoUnit from 'mongo-unit';
+
+import mongodb from 'mongodb';
 
 import { CampaignInterface } from '../../src/models/campaign.interface';
 import CampaignModel from '../../src/models/campaign.model';
+import DbClient from '../../src/DbClient';
 import { ReturnObject } from '../../src/models/common.interface';
 import mockCollections from '../mockCollections';
 
-const mockCampaigns : any = mockCollections.mockCampaigns;
+let db: mongodb.Db | undefined;
+const mockCampaigns: any = mockCollections.mockCampaigns;
 
-beforeAll(async() => {
-    const mongoTestUrl: string = await mongoUnit.start({ 
-        dbName: 'Creatures&Caves',
-        verbose: true
-    });
-    process.env.MONGO_URL = mongoTestUrl;
-    console.log('Mock MongoClient started at -> ' + mongoTestUrl);
-    console.log('mock users collection\n' + JSON.stringify(mockCampaigns, null, 4));
+beforeAll(async () => {
+    db = await DbClient.connect();
+    await db!.createCollection('campaigns');
 });
 
-describe('User Model', () => {
+beforeEach(async () => {
+    await db!.collection('campaigns').insertMany(mockCampaigns);
+});
 
-    beforeEach(async() => {
-        //reset mock collection
-        await mongoUnit.load(mockCampaigns);
-    });
+afterEach(async () => {
+    await db!.collection('campaigns').deleteMany({});
+});
 
-    afterEach(async () => {
-        //drop mock collection to disgard changes
-        await mongoUnit.drop();
-    });
+describe('Campaign Model', () => {
 
     describe('getCampaign', () => {
 
-        test('get all campaings linked to a certain user', async() => {
+        test('get all campaings linked to a certain user', async () => {
             const campaings: CampaignInterface[] = await CampaignModel.getCampaigns('abcdef123456123456abcdef');
+            console.log(campaings);
             expect(campaings.length).toBe(2);
         });
 
@@ -44,7 +41,7 @@ describe('User Model', () => {
             expect(campaign!.name).toEqual('Campaign 4');
         });
 
-        test('should return null when database can\'t find campaign', async () => {
+        test('should return null when db can\'t find campaign', async () => {
             const campaign: CampaignInterface | null = await CampaignModel.getCampaign('500150015001');
             expect(campaign).toBe(null);
         });
@@ -53,7 +50,7 @@ describe('User Model', () => {
 
     describe('createCampaign', () => {
 
-        test('should create a valid campaign', async() => {
+        test('should create a valid campaign', async () => {
             const result: ReturnObject = await CampaignModel.createCampaign('500150015001', 'NewCampaign', 'This is new');
             const expectedData: ReturnObject = {
                 success: true,
@@ -71,7 +68,7 @@ describe('User Model', () => {
 
     describe('editCampaign', () => {
 
-        test('should edit a valid user', async() => {
+        test('should edit a valid user', async () => {
             const campaign: CampaignInterface = {
                 id: '5dafb8ce1c9d340000c3b63b',
                 name: 'New Name',
@@ -86,7 +83,7 @@ describe('User Model', () => {
             expect(result).toEqual(expectedData);
         });
 
-        test('should not edit an non-existant campaign', async() => {
+        test('should not edit an non-existant campaign', async () => {
             const campaign: CampaignInterface = {
                 id: '000000000000',
                 name: 'name',
@@ -104,7 +101,7 @@ describe('User Model', () => {
 
     describe('deleteCampaign', () => {
 
-        test('should delete a valid campaign', async() => {
+        test('should delete a valid campaign', async () => {
             const result: ReturnObject = await CampaignModel.deleteCampaign('5dafb8ce1c9d340000c3b63b');
             const expectedData: ReturnObject = {
                 success: true,
@@ -113,7 +110,7 @@ describe('User Model', () => {
             expect(result).toEqual(expectedData);
         });
 
-        test('should not delete a non-existant campaign', async() => {
+        test('should not delete a non-existant campaign', async () => {
             const result: ReturnObject = await CampaignModel.deleteCampaign('000000000000');
             const expectedData: ReturnObject = {
                 success: false,
@@ -125,7 +122,8 @@ describe('User Model', () => {
 
     afterAll(async() => {
         try {
-            await mongoUnit.stop();
+            await db!.dropCollection('campaigns');
+            await DbClient.disconnect();
         } catch (error) {
             console.log(error);
         }
