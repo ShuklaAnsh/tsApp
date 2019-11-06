@@ -11,7 +11,10 @@ import mockCollections from '../mockCollections';
 const mockCampaigns : any = mockCollections.mockCampaigns;
 
 beforeAll(async() => {
-    const mongoTestUrl: string = await mongoUnit.start({ dbName: 'Creatures&Caves' });
+    const mongoTestUrl: string = await mongoUnit.start({ 
+        dbName: 'Creatures&Caves',
+        verbose: true
+    });
     process.env.MONGO_URL = mongoTestUrl;
     console.log('Mock MongoClient started at -> ' + mongoTestUrl);
     console.log('mock users collection\n' + JSON.stringify(mockCampaigns, null, 4));
